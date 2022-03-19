@@ -1,0 +1,376 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Adding the JavaScript file -->
+<!-- <script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'search_results.js') }}"></script> -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'view.js') }}"></script>
+<script type="text/javascript" src="{{url_for('static', filename = 'edit.js') }}"></script>
+
+<!-- Script for confirmation option -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
+
+<script> let university = {{uni|tojson}} </script>
+
+ <!-- Getting data from the Flask server -->
+
+
+<!-- Put some style here!!!-->
+
+<div class="bold">Edit item in the database!<br><br></div>
+
+<div class="row">
+    <div class="col-4"></div>
+    <div id="new_item" class="col-2">
+
+    </div>
+    <div id="link_item" class="col-2">
+
+    </div>
+    <div class="col-4"></div>
+</div>
+
+<div class="row add_row">
+    <div class="col-2">
+        University Name
+    </div>
+    <div class="col-2 name">
+        <input id="uni_name" type="text" placeholder="University"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        City
+    </div>
+    <div class="col-2 city">
+        <input id="uni_city" type="text" placeholder="City"><br>
+    </div>
+    <div class="col-2">
+        State
+    </div>
+    <div class="col-2 state">
+        <input id="uni_state" type="text" placeholder="State"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        University Logo
+    </div>
+    <div class="col-2 logo">
+        <input id="uni_logo" type="text" placeholder="Link (with https://)"><br>
+    </div>
+    <div class="col-2">
+        University Website
+    </div>
+    <div class="col-2 website">
+        <input id="uni_website" type="text" placeholder="Link (with https://)"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        School Information
+    </div>
+    <div class="col-2 funding">
+        <select id="uni_funding">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Private">Private</option>
+            <option value="Public">Public</option>
+        </select>
+    </div>
+    <div class="col-2 degrees">
+        <select id="uni_degrees">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="University">University</option>
+            <option value="College">College</option>
+        </select>
+    </div>
+    <div class="col-2 gender">
+        <select id="uni_gender">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Co-Ed">Co-Ed</option>
+            <option value="Men's School">Men's School</option>
+            <option value="Women's School">Women's School</option>
+        </select>
+    </div>
+    <div class="col-2 curriculum">
+        <select id="uni_curriculum">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Core Curriculum">Core Curriculum</option>
+            <option value="Open Curriculum">Open Curriculum</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        2021 Admission Rate
+    </div>
+    <div class="col-2 admit_rate">
+        <input id="uni_admit_rate" type="number" placeholder="Percentage"><br>
+    </div>
+    <div class="col-2">
+        Application Fee
+    </div>
+    <div class="col-2 application_fee">
+        <input id="uni_application_fee" type="number" placeholder="USD (Without $)"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Common App
+    </div>
+    <div class="col-2 common_app">
+        <select id="uni_common_app">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Coalition App
+    </div>
+    <div class="col-2 coalition_app">
+        <select id="uni_coalition_app">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        About the University
+    </div>
+    <div class="col-10 uni_description">
+        <textarea id="uni_description" placeholder="About the University" cols="100"></textarea><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Common App Essay
+    </div>
+    <div class="col-2 essay">
+        <select id="uni_common_app_essay">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Supplemental Essay Questions
+    </div>
+    <div class="col-2 supplements">
+        <select id="uni_supplemental_questions">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="None">None</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5+">5+</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Counselor Recommendation
+    </div>
+    <div class="col-2 rec">
+        <select id="uni_counselor_recommendation">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Teacher Evaluations
+    </div>
+    <div class="col-2 eval">
+        <select id="uni_teacher_evaluations">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="None">None</option>
+            <option value="1">1</option>
+            <option value="2">2</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Testing
+    </div>
+    <div class="col-2 testing">
+        <select id="uni_testing">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Test Optional">Test Optional</option>
+            <option value="Required">Required</option>
+            <option value="Recommended">Recommended</option>
+            <option value="No Testing">No Testing</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Tests Accepted
+    </div>
+    <div class="col-2 tests">
+        <select id="uni_tests">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="SAT/ACT">SAT/ACT</option>
+            <option value="SAT Only">SAT Only</option>
+            <option value="ACT Only">ACT Only</option>
+            <option value="Other">Other</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        TOEFL
+    </div>
+    <div class="col-2 toefl">
+        <select id="uni_toefl">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        IELTS
+    </div>
+    <div class="col-2 ielts">
+        <select id="uni_ielts">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Duolingo
+    </div>
+    <div class="col-2 duolingo">
+        <select id="uni_duolingo">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        CSS Profile
+    </div>
+    <div class="col-2 css">
+        <select id="uni_css_profile">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Documentation
+    </div>
+    <div class="col-2 doc">
+        <select id="uni_documentation">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Submit via IDOC">Submit via IDOC</option>
+            <option value="Other Method">Other Method</option>
+        </select>
+    </div>
+    <div class="col-2">
+        Supporting Materials
+    </div>
+    <div class="col-2 materials">
+        <select id="uni_supporting_materials">
+            <option value="" selected disabled hidden>Choose here</option>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Popular Majors
+    </div>
+    <div class="col-2 major">
+        <input id="major_1" type="text" placeholder="Major"><br>
+    </div>
+    <div class="col-2">
+        <input id="major_2" type="text" placeholder="Major"><br>
+    </div>
+    <div class="col-2">
+        <input id="major_3" type="text" placeholder="Major"><br>
+    </div>
+    <div class="col-2">
+        <input id="major_4" type="text" placeholder="Major"><br>
+    </div>
+    <div class="col-2">
+        <input id="major_5" type="text" placeholder="Major"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Famous Faculty
+    </div>
+    <div class="col-2 faculty">
+        <input id="faculty_1" type="text" placeholder="Faculty"><br>
+    </div>
+    <div class="col-2">
+        <input id="faculty_2" type="text" placeholder="Faculty"><br>
+    </div>
+    <div class="col-2">
+        <input id="faculty_3" type="text" placeholder="Faculty"><br>
+    </div>
+    <div class="col-2">
+        <input id="faculty_4" type="text" placeholder="Faculty"><br>
+    </div>
+    <div class="col-2">
+        <input id="faculty_5" type="text" placeholder="Faculty"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Famous Alumni
+    </div>
+    <div class="col-2 alumni">
+        <input id="alumni_1" type="text" placeholder="Alumnus/Alumna"><br>
+    </div>
+    <div class="col-2">
+        <input id="alumni_2" type="text" placeholder="Alumnus/Alumna"><br>
+    </div>
+    <div class="col-2">
+        <input id="alumni_3" type="text" placeholder="Alumnus/Alumna"><br>
+    </div>
+    <div class="col-2">
+        <input id="alumni_4" type="text" placeholder="Alumnus/Alumna"><br>
+    </div>
+    <div class="col-2">
+        <input id="alumni_5" type="text" placeholder="Alumnus/Alumna"><br>
+    </div>
+</div>
+<div class="row add_row">
+    <div class="col-2">
+        Famous Student Organizations
+    </div>
+    <div class="col-2 org">
+        <input id="org_1" type="text" placeholder="Student Organization"><br>
+    </div>
+    <div class="col-2">
+        <input id="org_2" type="text" placeholder="Student Organization"><br>
+    </div>
+    <div class="col-2">
+        <input id="org_3" type="text" placeholder="Student Organization"><br>
+    </div>
+    <div class="col-2">
+        <input id="org_4" type="text" placeholder="Student Organization"><br>
+    </div>
+    <div class="col-2">
+        <input id="org_5" type="text" placeholder="Student Organization"><br>
+    </div>
+</div>
+<div class="row add_row submit_data">
+    <button id="submit_new_data" type="submit">Submit Edits</button>
+    <button id="discard" >Discard Changes</button>
+</div>
+
+<br> 
+
+{% endblock %}

@@ -1,0 +1,74 @@
+.welcome{
+    color: grey;
+    font-weight: bold;
+}
+
+.search_bar{
+    float: right;
+    margin-right: 0px;
+}
+
+.image{
+    max-width: 200px;
+    max-height: 200px;
+}
+
+.webpage_description{
+    display: flex;
+}
+
+.description{
+    margin-left: 10px;
+}
+
+.homepage_img{
+    margin-top: 5px;
+}
+
+.item{
+    align-items: center;
+}
+
+.centered{
+    /* display: flex; */
+    align-items: center;
+    text-align: center;
+}
+
+.second_row{
+    margin-top: 20px;
+}
+
+.bold{
+    font-weight: bold;
+    color: rgb(226, 152, 15);
+}
+
+.search_item{
+    font-size: x-large;
+}
+
+.base_color{
+    background-color: bisque;
+}
+
+.grey{
+    background-color: rgb(235, 235, 235);
+}
+
+.add_row{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.submit_data{
+    margin-left: 1px;
+}
+
+.error{
+    color: red;
+}
+
+.edit_row{
+    padding-bottom: 20px;
+}

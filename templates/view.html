@@ -1,0 +1,188 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Put some style here!!!-->
+
+<!-- Adding the JavaScript file -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'search_results.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'view.js') }}"></script>
+
+<script> let uni_id = {{uni.id}} </script>
+
+<div class="row">
+    <div class="col-8">
+        <div class="centered">{{uni.name}}</div>
+        <div class="centered">
+            <img class="img-fluid image" src={{uni.image}} alt="{{uni.name}} Logo">
+            <br>
+        </div>
+        <div class="centered">
+            <a href="{{uni.website}}">{{uni.website}}</a>, {{uni.city}}, {{uni.state}}<br>
+            {{uni.school_info["Funding"]}}, {{uni.school_info["Degrees"]}}, {{uni.school_info["Gender"]}}, {{uni.school_info["Curriculum"]}}<br>
+            2021 Admission Rate: {{uni.admission_rate["2021"]}}%<br>
+            Application Fee: ${{uni.application_fee}}<br>
+            
+            {% if uni.application_platforms["Common App"] == 'Yes' %}
+                Common App
+            {% endif %}
+            {% if uni.application_platforms["Coalition App"] == 'Yes' %}
+                , Coalition App
+            {% endif %}
+            {% if uni.application_platforms["Common App"] != 'Yes' and uni.application_platforms["Coalition App"] != 'Yes'%}
+                Apply directly to {{uni.name}}
+            {% endif %}
+            <br>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-4 bold">
+                Requirements
+            </div>
+            <div class="col-8">
+                {% if uni.application_requirements["Common App Essay"] == 'Yes' %}
+                    Common App Essay<br>
+                {% endif %}
+                {% if uni.application_requirements["Supplemental Questions"] == 'None' %}
+                    No Supplemental Questions<br>
+                {% elif uni.application_requirements["Supplemental Questions"] == '1' %}
+                    1 Supplemental Question<br>
+                {% else %}
+                    {{uni.application_requirements["Supplemental Questions"]}} Supplemental Questions<br>
+                {% endif %}
+                {% if uni.application_requirements["Teacher Evaluations"] == 'None' %}
+                    No Teacher Evaluations<br>
+                {% elif uni.application_requirements["Teacher Evaluations"] == '1' %}
+                    1 Teacher Evaluation<br>
+                {% else %}
+                    {{uni.application_requirements["Teacher Evaluations"]}} Teacher Evaluations<br>
+                {% endif %}
+                {% if uni.application_requirements["Counselor Recommendation"] == 'Yes' %}
+                    Counselor Recommendation<br>
+                {% endif %}
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 bold">
+                Testing
+            </div>
+            <div class="col-8">
+                {% if uni.testing["Testing"] != 'No Testing' %}
+                    {{uni.testing["Testing"]}} ({{uni.testing["Tests Accepted"]}})<br>
+                {% else %}
+                    No Testing<br>
+                {% endif %}
+                {% if uni.language["TOEFL"] == 'No' or uni.language["IELTS"] == 'No' or uni.language["Duolingo"] == 'No' %}
+                    No Language Tests Required<br>
+                {% else %}
+                    {% if uni.language["TOEFL"] == 'Yes' %}
+                        TOEFL, 
+                    {% endif %}
+                    {% if uni.language["IELTS"] == 'Yes' %}
+                        IELTS, 
+                    {% endif %}
+                    {% if uni.language["Duolingo"] == 'Yes' %}
+                        Duolingo
+                    {% endif %}
+                {% endif %}
+                <br>
+                <br>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-4 bold">
+                Financial Aid
+            </div>
+            <div class="col-8">
+                {% if uni.finaid["CSS Profile"] == 'Yes' %}
+                    CSS Profile<br>
+                {% else %}
+                    No CSS Profile<br>
+                {% endif %}
+                {% if uni.finaid["Documentation"] == 'Submit via IDOC' %}
+                    Submissions via IDOC<br>
+                {% else %}
+                    Submissions via Other Methods<br>
+                {% endif %}
+                {% if uni.finaid["Supporting Materials"] == 'Yes' %}
+                    Supporting Materials<br>
+                {% else %}
+                    No Additional Materials Required<br>
+                {% endif %}
+                <br>
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row second_row">
+    <div class="col-8 centered">
+        <div>
+            {{uni.description}}
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-4 bold">
+                Popular Majors
+            </div>
+            <div class="col-8">
+                {% for major in uni.majors %}
+                {{major}}<br>
+                {% endfor %}
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row second_row">
+    <div class="col-5">
+        <div class="row">
+            <div class="col-4 bold">
+                Famous Student Organizations
+            </div>
+            <div class="col-8">
+                {% for org in uni.student_orgs %}
+                {{org}}<br>
+                {% endfor %}
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-3">
+        <div class="row">
+            <div class="col-4 bold">
+                Famous Alumni
+            </div>
+            <div class="col-8">
+                {% for alumni in uni.alumni %}
+                {{alumni}}<br>
+                {% endfor %}
+                <br>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row">
+            <div class="col-4 bold">
+                Famous Faculty
+            </div>
+            <div class="col-8">
+                {% for faculty in uni.faculty %}
+                {{faculty}}<br>
+                {% endfor %}
+                <br>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row submit_data edit_row">
+    <button id="edit_data">Edit Data</button>
+    <br>
+</div>
+
+{% endblock %}

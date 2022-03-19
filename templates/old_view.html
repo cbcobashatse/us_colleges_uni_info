@@ -1,0 +1,51 @@
+<div>
+    <img class="img-fluid image" src={{uni.image}}>
+    <br>
+</div>
+
+<div>
+    {{uni.name}} is located in {{uni.state}}<br>
+    Year Established: {{uni.year_founded}}<br>
+    Endowment: {{uni.endowment}}<br>
+    President: 
+    {% for president in uni.president %}
+    {{president}}<br>
+    {% endfor %}
+    Website: <a>{{uni.website}}</a> <br>
+    <br>
+</div>
+
+<div>
+    Short Description:<br>
+    {{uni.description}}<br>
+    <br>
+</div>
+
+<div>
+    Admission Rates:<br>
+    {% for key, value in uni.admission_rate.items() %}
+    <li>{{key}}: {{value}}</li>
+    {% endfor %}
+    Application Fee: {{uni.application_fee}}<br>
+    Application Requirements:<br>
+    {% for requirement in uni.application_requirements %}
+    <li>{{requirement}}</li>
+    {% endfor %}
+    <br>
+</div>
+
+<div>
+    Notable Alumni:<br>
+    {% for alumnus in uni.alumni %}
+    <li>{{alumnus}}</li>
+    {% endfor %}
+    <br>
+</div>
+
+<div>
+    Majors:<br>
+    {% for major in uni.majors %}
+    <li>{{major}}</li>
+    {% endfor %}
+    <br>
+</div>

@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <!-- Adding the JavaScript file -->
+    <script type="text/javascript" src="{{ url_for('static', filename = 'search_results.js') }}"></script>
+
+    <div class="bold">
+        Search Results for <span class="search_item">"{{item}}"</span><br>
+    </div>
+
+    <!-- Getting data from the Flask server -->
+    <script>
+        let results = {{results|tojson}}
+    </script>
+
+    {% if results|length == 0 %}
+    <div class="results">
+        <br>
+        No results found<br>
+    </div>
+    {% endif %}
+
+    {% if results|length > 0 %}
+    <div>
+        {{results|length}} results found!<br>
+        <br>
+    </div>
+    <div class="results">
+        {% for university in results %}
+            <div id={{university.id}} class="university">{{university.name}}</div>
+        {% endfor %}
+    </div>
+    {% endif %}
+{% endblock %}

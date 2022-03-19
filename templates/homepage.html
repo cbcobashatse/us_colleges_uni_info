@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<!-- Adding the JavaScript file -->
+<script type="text/javascript" src="{{ url_for('static', filename = 'homepage.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename = 'search_results.js') }}"></script>
+
+ <!-- Getting data from the Flask server -->
+ <script>
+     let universities = {{data_uni|tojson}}
+ </script>
+
+<!-- Put some style here!!!-->
+
+<div class="row">
+    <div class="col-6">
+        <div class="bold">
+            Thinking of Applying to a school in the US? We've Got You!!!<br>
+            <br>
+        </div>
+        <div class="webpage_description">
+            <div>
+                <img class="img-fluid image homepage_img" src=..\static\images\how_to_apply.jpg alt="Students reading books">
+                <br>
+            </div>
+            <div class="description">
+                We have compiled information about most US colleges and universities!<br>
+                <br>
+                We hope this will be a resource for you as you navigate college applications!<br>
+                <br>
+            </div>
+        </div>
+        <div class="webpage_description">
+            <div>
+                <img class="img-fluid image homepage_img" src=..\static\images\filling_out_forms.jpg alt="Man filling out forms">
+                <br>
+            </div>
+            <div class="description webpage_description item">
+                Check out application requirements, financial aid options, and popular majors of most schools!
+            </div>
+        </div>
+    </div>
+    <div class="col-2"></div>
+    <div class="col-4">
+        <div class="bold">
+            Most Popular Institutions<br>
+            <br>
+        </div>
+        <div id="popular_unis"></div>
+    </div>
+</div>
+<!-- Figure out final image -->
+<!-- <div class="row">
+    <div>
+        <img class="img-fluid image homepage_img" src=..\static\images\map.jpg>
+        <br>
+    </div>
+</div> -->
+ 
+
+{% endblock %}
